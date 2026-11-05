@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#070313">
+    <title>M.A INFO TECH | Custom Yono & Rummy App Development</title>
+
+    <style>
+        :root {
+            --bg-deep: #06020e;
+            --purple-electric: #8b24ff;
+            --purple-glow: rgba(139, 36, 255, 0.45);
+            --neon-blue: #00d2ff;
+            --gold-btn-start: #ffe066;
+            --gold-btn-mid: #f5af19;
+            --gold-btn-end: #e65c00;
+            --text-white: #ffffff;
+            --text-sub: #b3a4cb;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        html, body {
+            min-height: 100vh;
+            background: var(--bg-deep);
+            color: var(--text-white);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+
+        /* Ambient Lighting */
+        .ambient-fx {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            background: 
+                radial-gradient(circle at 50% 25%, rgba(139, 36, 255, 0.35) 0%, rgba(0, 210, 255, 0.12) 45%, transparent 70%),
+                radial-gradient(circle at 50% 90%, #000 0%, transparent 100%);
+            z-index: 1;
+        }
+
+        .landing-card {
+            position: relative;
+            z-index: 2;
+            width: 90%;
+            max-width: 420px;
+            background: linear-gradient(160deg, rgba(22, 11, 40, 0.94) 0%, rgba(10, 4, 20, 0.98) 100%);
+            border: 1px solid rgba(139, 36, 255, 0.35);
+            border-radius: 36px;
+            padding: 34px 22px 28px;
+            text-align: center;
+            box-shadow: 0 25px 65px rgba(0, 0, 0, 0.9), 0 0 45px rgba(139, 36, 255, 0.25);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            margin: 20px 0;
+        }
+
+        /* Top Bar: Updated Brand Header */
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 22px;
+            padding: 0 4px;
+        }
+
+        .brand-logo-text {
+            text-align: left;
+            line-height: 1;
+        }
+
+        .brand-logo-text h2 {
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 0.8px;
+            background: linear-gradient(180deg, #fff 20%, #ffcf4a 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .brand-logo-text h2 span {
+            font-size: 14px;
+            color: #ffcf4a;
+            -webkit-text-fill-color: #ffcf4a;
+        }
+
+        .brand-logo-text p {
+            font-size: 9.5px;
+            letter-spacing: 1.5px;
+            color: var(--neon-blue);
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-top: 3px;
+        }
+
+        .pipeline-steps {
+            font-size: 8.5px;
+            font-weight: 800;
+            color: var(--text-sub);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .pipeline-steps span {
+            color: var(--purple-electric);
+        }
+
+        .custom-pill {
+            display: inline-block;
+            background: linear-gradient(90deg, #7000ff, #00d2ff);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 4px 16px;
+            border-radius: 50px;
+            box-shadow: 0 0 15px rgba(112, 0, 255, 0.6);
+            margin-bottom: 8px;
+        }
+
+        .hero-title {
+            font-size: 28px;
+            font-weight: 950;
+            text-transform: uppercase;
+            line-height: 1.05;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+            color: #ffffff;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .hero-title span {
+            color: #ffd043;
+            text-shadow: 0 0 20px rgba(255, 208, 67, 0.4);
+        }
+
+        .hero-subtitle {
+            font-size: 12.5px;
+            color: var(--text-sub);
+            font-weight: 600;
+            margin-bottom: 22px;
+            line-height: 1.4;
+        }
+
+        .features-list {
+            background: rgba(12, 5, 25, 0.65);
+            border: 1px solid rgba(139, 36, 255, 0.25);
+            border-left: 4px solid var(--purple-electric);
+            border-radius: 20px;
+            padding: 16px 14px;
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .feature-item:last-child { margin-bottom: 0; }
+
+        .feature-icon-box {
+            width: 34px;
+            height: 34px;
+            background: rgba(139, 36, 255, 0.2);
+            border: 1px solid rgba(139, 36, 255, 0.4);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .feature-icon-box svg {
+            width: 18px;
+            height: 18px;
+            fill: #00d2ff;
+        }
+
+        .feature-content h4 {
+            font-size: 13.5px;
+            font-weight: 800;
+            color: #ffffff;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .feature-content p {
+            font-size: 11px;
+            color: var(--text-sub);
+            margin: 2px 0 0 0;
+            font-weight: 500;
+        }
+
+        .trust-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .trust-box {
+            background: rgba(18, 9, 36, 0.7);
+            border: 1px solid rgba(139, 36, 255, 0.2);
+            border-radius: 12px;
+            padding: 8px 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-align: left;
+        }
+
+        .trust-box span {
+            color: #ffcf4a;
+            font-size: 13px;
+        }
+
+        .trust-box p {
+            font-size: 10.5px;
+            font-weight: 700;
+            color: #e2d9f3;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .cta-container {
+            position: relative;
+            width: 100%;
+        }
+
+        .cta-quote-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            padding: 19px 0;
+            border-radius: 50px;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            color: #0c0414;
+            font-size: 20px;
+            font-weight: 950;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: linear-gradient(90deg, var(--gold-btn-start) 0%, var(--gold-btn-mid) 50%, var(--gold-btn-end) 100%);
+            box-shadow: 0 12px 30px rgba(245, 175, 25, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.1s ease;
+        }
+
+        .cta-quote-btn:active {
+            transform: scale(0.97);
+        }
+
+        .cta-quote-btn::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
+            transform: skewX(-20deg);
+            animation: sheen 3.5s infinite ease-in-out;
+        }
+
+        @keyframes sheen {
+            0% { left: -100%; }
+            18% { left: 120%; }
+            100% { left: 120%; }
+        }
+
+        .arrow-badge {
+            width: 28px;
+            height: 28px;
+            background: #0c0414;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .arrow-badge svg {
+            width: 14px;
+            height: 14px;
+            fill: #f5af19;
+            transform: rotate(-90deg);
+        }
+
+        .footer-note {
+            margin-top: 18px;
+            font-size: 11px;
+            color: var(--text-sub);
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .footer-note span {
+            color: #00d2ff;
+        }
+
+        /* Fallback Modal */
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            z-index: 9999;
+            align-items: flex-end;
+            justify-content: center;
+        }
+
+        .modal-body {
+            background: #140d22;
+            width: 100%;
+            max-width: 440px;
+            border-top-left-radius: 26px;
+            border-top-right-radius: 26px;
+            border-top: 1px solid rgba(139, 36, 255, 0.4);
+            padding: 24px 20px;
+            text-align: center;
+        }
+
+        .modal-title {
+            font-size: 17px;
+            font-weight: 800;
+            margin-bottom: 6px;
+            color: #fff;
+        }
+
+        .modal-desc {
+            font-size: 12.5px;
+            color: var(--text-sub);
+            margin-bottom: 18px;
+        }
+
+        .modal-action {
+            display: block;
+            width: 100%;
+            padding: 15px 0;
+            border-radius: 14px;
+            font-size: 14.5px;
+            font-weight: 800;
+            text-decoration: none;
+            margin-bottom: 9px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-open-app {
+            background: linear-gradient(90deg, #ffe066, #f5af19);
+            color: #0c0414;
+        }
+
+        .btn-copy-link {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+        }
+
+        @media (max-height: 650px) {
+            .landing-card { padding: 22px 18px 20px; }
+            .hero-title { font-size: 24px; }
+            .features-list { margin-bottom: 16px; padding: 12px; }
+            .trust-grid { margin-bottom: 16px; }
+            .cta-quote-btn { padding: 15px 0; font-size: 17px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ambient-fx"></div>
+
+    <div class="landing-card">
+        <!-- Brand Header Bar Updated -->
+        <div class="header-top">
+            <div class="brand-logo-text">
+                <h2>M.A <span>👑</span></h2>
+                <p>INFO TECH</p>
+            </div>
+            <div class="pipeline-steps">
+                IDEA <span>•</span> DESIGN <span>•</span> DEVELOP <span>•</span> SCALE
+            </div>
+        </div>
+
+        <div class="custom-pill">CUSTOM SOLUTIONS</div>
+        <h1 class="hero-title">GAMING APP <span>DEVELOPMENT</span></h1>
+        <p class="hero-subtitle">Launch Your Own Yono & Rummy Platform with Premium Features</p>
+
+        <!-- Features Stack -->
+        <div class="features-list">
+            <div class="feature-item">
+                <div class="feature-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M21 6H3c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-10 7H8v3H6v-3H3v-2h3V8h2v3h3v2zm4.5 2c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm4-3c-.83 0-1.5-.67-1.5-1.5S18.67 9 19.5 9s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                </div>
+                <div class="feature-content">
+                    <h4>Multiple Games Included</h4>
+                    <p>Yono, Rummy, Dragon vs Tiger, Jet Crash & More</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M17 1.01L7 1c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-1.99-2-1.99zM17 19H7V5h10v14z"/></svg>
+                </div>
+                <div class="feature-content">
+                    <h4>Android & iOS Ready</h4>
+                    <p>High Performance Cross-Platform Architecture</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/></svg>
+                </div>
+                <div class="feature-content">
+                    <h4>Full Admin Control Panel</h4>
+                    <p>Live Monitoring, Automated Payment Gateways & Analytics</p>
+                </div>
+            </div>
+
+            <div class="feature-item">
+                <div class="feature-icon-box">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                </div>
+                <div class="feature-content">
+                    <h4>Custom Branding & Setup</h4>
+                    <p>Your Brand, Your Style, 100% Whitelabel Delivery</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4 Badges Row -->
+        <div class="trust-grid">
+            <div class="trust-box">
+                <span>⚡</span>
+                <p>Fast Development</p>
+            </div>
+            <div class="trust-box">
+                <span>🛡️</span>
+                <p>Secure & Scalable</p>
+            </div>
+            <div class="trust-box">
+                <span>🚀</span>
+                <p>On-Time Delivery</p>
+            </div>
+            <div class="trust-box">
+                <span>🤝</span>
+                <p>Dedicated Team</p>
+            </div>
+        </div>
+
+        <!-- CTA Button -->
+        <div class="cta-container">
+            <button class="cta-quote-btn" id="join-btn">
+                <span>Get a Quote</span>
+                <span class="arrow-badge">
+                    <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+                </span>
+            </button>
+        </div>
+
+        <p class="footer-note">LET'S BUILD SOMETHING <span>BIG TOGETHER</span></p>
+    </div>
+
+    <!-- Fallback Modal for In-App Browsers -->
+    <div id="modal-overlay">
+        <div class="modal-body">
+            <div class="modal-title">Telegram Didn't Open Automatically?</div>
+            <div class="modal-desc">Tap below to connect directly with our development desk.</div>
+            <a id="modal-app-link" class="modal-action btn-open-app" href="#">Open in Telegram</a>
+            <button id="modal-copy-btn" class="modal-action btn-copy-link">Copy Channel Link</button>
+        </div>
+    </div>
+
+    <script>
+        const CONFIG = {
+            pixelId: "1377156974492468",
+            channelSlug: "2WABiy9Y6go3MThl",
+            webFallback: "https://t.me/+2WABiy9Y6go3MThl"
+        };
+
+        // 1. ANTI-BOT LAZY PIXEL INITIALIZATION
+        let pixelInitialized = false;
+
+        function initPixelOnHumanEvent() {
+            if (pixelInitialized) return;
+            pixelInitialized = true;
+
+            !function(f,b,e,v,n,t,s) {
+                if(f.fbq) return;
+                n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s);
+            }(window, document, 'script', 'https://connect.facebook.net/en_US/fbevents.js');
+
+            fbq('init', CONFIG.pixelId);
+            fbq('track', 'PageView');
+        }
+
+        document.addEventListener('touchstart', initPixelOnHumanEvent, { passive: true, once: true });
+        document.addEventListener('pointerdown', initPixelOnHumanEvent, { passive: true, once: true });
+        setTimeout(initPixelOnHumanEvent, 1600);
+
+        // 2. AD SCRUBBER (Clean tokens to prevent scraper flags)
+        (function scrubAdParameters() {
+            try {
+                if (!window.history || !history.replaceState || !window.URL) return;
+                const currentUrl = new URL(window.location.href);
+                const blacklistedParams = [
+                    "utm_source", "utm_medium", "utm_campaign", "utm_term",
+                    "utm_content", "fbclid", "gclid", "ad_id", "campaign_id", "adset_id"
+                ];
+                let modified = false;
+                blacklistedParams.forEach(param => {
+                    if (currentUrl.searchParams.has(param)) {
+                        currentUrl.searchParams.delete(param);
+                        modified = true;
+                    }
+                });
+                if (modified) {
+                    history.replaceState(null, document.title, currentUrl.pathname + currentUrl.hash);
+                }
+            } catch (e) {}
+        })();
+
+        // 3. SECURE DEEP LINK HANDOFF & MODAL FALLBACK
+        const joinBtn = document.getElementById('join-btn');
+        const overlay = document.getElementById('modal-overlay');
+        const modalAppLink = document.getElementById('modal-app-link');
+        const modalCopyBtn = document.getElementById('modal-copy-btn');
+
+        joinBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+
+            // Track Subscribe conversion
+            if (typeof fbq === 'function') {
+                fbq('track', 'Subscribe');
+            } else {
+                new Image().src = `https://www.facebook.com/tr?id=${CONFIG.pixelId}&ev=Subscribe&noscript=1`;
+            }
+
+            const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const tgDeepLink = `tg://join?invite=${CONFIG.channelSlug}`;
+
+            if (isMobile) {
+                const startTime = Date.now();
+                let hasSwitchedApp = false;
+
+                const visibilityTracker = function() {
+                    if (document.hidden) {
+                        hasSwitchedApp = true;
+                    }
+                };
+                document.addEventListener('visibilitychange', visibilityTracker, { once: true });
+
+                window.location.href = tgDeepLink;
+
+                setTimeout(() => {
+                    document.removeEventListener('visibilitychange', visibilityTracker);
+                    if (!hasSwitchedApp && !document.hidden && (Date.now() - startTime < 3500)) {
+                        modalAppLink.href = CONFIG.webFallback;
+                        overlay.style.display = 'flex';
+                    }
+                }, 2200);
+            } else {
+                window.location.href = CONFIG.webFallback;
+            }
+        });
+
+        modalCopyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(CONFIG.webFallback).then(() => {
+                this.textContent = "Copied to Clipboard!";
+                setTimeout(() => { this.textContent = "Copy Channel Link"; }, 2000);
+            }).catch(() => {
+                window.location.href = CONFIG.webFallback;
+            });
+        });
+
+        overlay.addEventListener('click', function(e) {
+            if (e.target === overlay) {
+                overlay.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
